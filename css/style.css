@@ -1,0 +1,113 @@
+/* common css */
+/* ====================== */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,100;1,200;1,300;1,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,600;1,6..12,800;1,6..12,900&display=swap'); */
+
+/* background: linear-gradient(90deg, rgba(203, 203, 216, 1) 0%, rgba(155, 237, 254, 1) 100%) !important;*/
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Nunito Sans', sans-serif; */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+a,
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/*Header section */
+.bazarForm,.millForm,.memberForm,.expenseForm,.record-form,.meal_routine{
+    display: none;
+    background: #b0cfea;
+}
+.record-form {
+    background: #b0cfea;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.mill_update_container .form-group {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+body{
+    scrollbar-width: none;
+    background-image: url('../mill-bg.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:white;
+}
+.header__style{
+    width: 100%;
+    padding:10px 0px;
+    background: linear-gradient(10deg, #000, transparent);
+}
+.total-mill.mt-2.mb-3.d-flex.flex-column {
+    background: #005f0ecf;
+    width: 40%;
+    padding: 10px;
+    border-radius: 10px;
+}
+form#meal_routineform .form-group {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 0.6fr 1fr 1fr;
+    grid-gap: 10px;
+    margin-bottom: 10px;
+}
+.meal_routine .form-group input:nth-child(1) {
+    background: #0a190a80;
+    color: white;
+    width: 100%;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.modal-content {
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: 90vh;
+}
+
+div#mill_expense_modal {
+    width: 100%;
+    background: #000000cc;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+#mill_expense_modal{
+    display: none;
+}
+.form-group.choose_action {
+    background: #448719d1;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-group.choose_action label {
+    font-size: 25px;
+    font-weight: bold;
+    color: #000000;
+}
