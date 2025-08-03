@@ -47,7 +47,12 @@
                             <div class="rounded p-4 mill-update-form m-1 millForm">
                                 <h2 class="mt-2 mb-2  ">Mill Update</h2>
                                 <form action="" id="millFormSubmit">
+                                    <a href="#" class="btn-sm btn btn-warning m-2">
+                                        <input id="selectAll" name="allMember" type="checkbox">
+                                        <label for="selectAll">Select all</label>
+                                    </a>
                                 <div class="form-group">
+                                
                                         <ul>
                                         <?php foreach($all_members as $member){ ?>
                                                 <li class="btn btn-primary list-item m-2">
@@ -106,6 +111,14 @@
                                     <div class="form-group mt-2 mb-2">
                                         <label for="memberEmail" class=" ">Enter Member E-mail</label>
                                         <input id="memberEmail" name="member_email" class="form-control" type="email" placeholder="Enter Email">
+                                    </div>
+                                    <div class="form-group mt-2 mb-2">
+                                        
+                                        <select name="seat_type" id="seat_type" class="form-control">
+                                            <option value="null" selected disabled>Select Seat Type</option>
+                                            <option value="room" >Room</option>
+                                            <option value="dining" >Dining</option>
+                                        </select>
                                     </div>
                                     <button class="mt-2 btn btn-warning">Add</button>
                                 </form>

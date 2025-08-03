@@ -6,13 +6,18 @@
     if(isset($_POST['addMember'])){
         $member_name=$DB->escapeString($_POST['member_name']);
         $member_email=$DB->escapeString($_POST['member_email']);
+        $member_seat_type=$DB->escapeString($_POST['seat_type']);
         if(empty($member_name) || empty($member_email)){
             echo json_encode(array('error'=>"Name or email empty"));
             exit;
         }else if(preg_match("/[^a-z ]/i", $member_name)){
             echo json_encode(array('error'=>"Name contains special characters."));
             exit;
-        }else{
+        }else if(empty($member_seat_type)){
+            echo json_encode(array('error'=>"Select seat type."));
+            exit;
+        }
+        else{
             $DB->select("members","member_name",null, "member_name='$member_name'");
             if(count($DB->getResult())>0){
                 echo json_encode(array('error'=>'Try different name'));
@@ -20,7 +25,8 @@
             }else{
                 $params=[
                     'member_name'=>$member_name,
-                    'member_email'=>$member_email
+                    'member_email'=>$member_email,
+                    'seat_type'=>$member_seat_type
                 ];
                 $DB->insert("members",$params);
                 if($DB->getResult()){

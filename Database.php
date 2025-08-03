@@ -124,7 +124,7 @@
 
 
         public function sql($sql){
-            $this->query = $sql; // Pass back the SQL
+            // $this->query = $sql; // Pass back the SQL
             $query = $this->mysqli->query($sql);
     
             if($query){

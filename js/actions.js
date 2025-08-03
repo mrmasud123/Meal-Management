@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+    $('#selectAll').change(function() {
+        var isChecked = $(this).prop('checked');
+
+        $('.mill_member_check').prop('checked', isChecked);
+        
+    });
+
     //Meal routine check
     $.ajax({
         url:'actions.php',
