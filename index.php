@@ -21,8 +21,9 @@
                 <div class="mill-header header__style py-3 text-center d-flex align-items-center flex-column">
                     <h1>Bachelor Flat - 11</h1>
                     <div class="mt-5 mill-btns w-50 d-flex align-items-center justify-content-around">
-                        <a href="update-mill.php" class="btn bg-primary nav-link text-light ms-2">Update Credentials</a>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#routineModal">Routine</button>
+                        <a href="index.php" class="btn btn-sm btn-success">Home</a>
+                        <a href="update-mill.php" class="btn-sm btn bg-primary nav-link text-light ms-2">Update Credentials</a>
+                        <a href="flat_credentials.php" class="btn btn-sm btn-warning">Add/Update Utilites</a>
                     </div>
                 </div>
                 <div class="mill-contents">

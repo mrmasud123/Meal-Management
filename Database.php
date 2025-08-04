@@ -4,13 +4,13 @@
         private $db_host="localhost";
         private $db_username="root";
         private $db_password="";
-        private $db_name="mill";
+        private $db_name="meal";
 
         private $mysqli="";
         public $result=array();
         private $con=false;
 
-        public $hostname="http://localhost/mill";
+        public $hostname="http://localhost/meal";
         public function __construct(){
             if($this->con==false){
                 $this->con=true;

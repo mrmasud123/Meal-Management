@@ -3,6 +3,7 @@
 include_once 'Database.php';
 $DB=new Database();
 $mill_month=$_GET['month'];
+$mill_year=$_GET['year'];
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,7 @@ $mill_month=$_GET['month'];
                             <h1>Total Mill : </h1>
                             <h1><span class="badge bg-success">
                             <?php 
-                                $DB->select("mill_tbl","SUM(mill_count) as mill",null,"MONTHNAME(mill_date) = '$mill_month'");  
+                                $DB->select("mill_tbl","SUM(mill_count) as mill",null,"MONTHNAME(mill_date) = '$mill_month' AND YEAR(mill_date) = '$mill_year'");  
                                 $total_mill=0;                  
                                 $total_mill_count=$DB->getResult();
                                

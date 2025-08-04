@@ -7,6 +7,8 @@
         $member_name=$DB->escapeString($_POST['member_name']);
         $member_email=$DB->escapeString($_POST['member_email']);
         $member_seat_type=$DB->escapeString($_POST['seat_type']);
+
+        // print_r($_POST);
         if(empty($member_name) || empty($member_email)){
             echo json_encode(array('error'=>"Name or email empty"));
             exit;
@@ -321,9 +323,22 @@
             $total=0;
             $DB->select("members","*");
             $all_members=$DB->getResult();
+            
+            // $rents=array();
+            // foreach($all_members as $member){
+            //     if($member['seat_type']=='room_a'){
+            //         $rents[$member['member_name']]= $member['seat_rent'] / $_POST['flat_rent'];
+            //     }else if($member['seat_type'] == 'room_b'){
+            //         $rents[$member['member_name']]= $member['seat_rent'] / $_POST['flat_rent'];
+            //     }else if($member['seat_type'] == 'room_c'){
+            //         $rents[$member['member_name']]= $member['seat_rent'] / $_POST['flat_rent'];
+            //     }
+            // }
+            // print_r($rents);
+            // die();
             $total_members=count($all_members);
-            $dining_space_rent=$_POST['flat_rent']*0.13;
-            $other_per_person_rent=($_POST['flat_rent']-$dining_space_rent)/($total_members-1);
+            // $dining_space_rent=$_POST['flat_rent']*0.13;
+            // $other_per_person_rent=($_POST['flat_rent']-$dining_space_rent)/($total_members-1);
             $per_person_service_chrg=round($_POST['service_charge']/$total_members);
             $per_person_garbage_chrg=round($_POST['garbage_charge']/$total_members);
             $per_person_electricity_bill=round($_POST['electricity_bill']/$total_members);
@@ -344,18 +359,18 @@
                 </thead>
                 <tbody>';
                 foreach($all_members as $members){
-                    if($members['seat_type']=="dining"){
-                        $seat_rate=$dining_space_rent;
-                        $flag="bg-warning";
-                    }else{
-                        $seat_rate=$other_per_person_rent;
-                        $flag="bg-light";
-                    }
-                    $expense=$seat_rate+$per_person_electricity_bill+$per_person_garbage_chrg+$per_person_service_chrg+$per_person_gas_bill+$per_person_khala_salary;
+                    // if($members['seat_type']=="dining"){
+                    //     $seat_rate=$dining_space_rent;
+                    //     $flag="bg-warning";
+                    // }else{
+                    //     $seat_rate=$other_per_person_rent;
+                    //     $flag="bg-light";
+                    // }
+                    $expense=$members['seat_rent']+$per_person_electricity_bill+$per_person_garbage_chrg+$per_person_service_chrg+$per_person_gas_bill+$per_person_khala_salary;
                     $total+=$expense;
                     $params=[
                         'member'=>$members['member_name'],
-                        'flat_rent'=>$seat_rate,
+                        'flat_rent'=>$members['seat_rent'],
                         'service_charge'=>$per_person_service_chrg,
                         'garbage_charge'=>$per_person_garbage_chrg,
                         'electricity_bill'=>$per_person_electricity_bill,
@@ -366,16 +381,18 @@
                     $DB->insert('monthly_expenses',$params);
                     
                     $output.='<tr class="'.$flag.'">
-                        <td class="text-capitalize">'.$members['member_name'].'</td>
-                        <td>'. round($seat_rate ) .'</td>
-                        <td>'. round($per_person_service_chrg ) .'</td>
-                        <td>'. round($per_person_garbage_chrg ) .'</td>
-                        <td>'. round($per_person_electricity_bill ) .'</td>
-                        <td>'. round($per_person_gas_bill ) .'</td>
-                        <td>'. round($per_person_khala_salary ) .'</td>
-                        <td align="center"><span class="badge bg-info">'. round($expense ) .'</span></td>
+                    <td class="text-capitalize">'.$members['member_name'].'</td>
+                    <td>'. round($members['seat_rent'] ) .'</td>
+                    <td>'. round($per_person_service_chrg ) .'</td>
+                    <td>'. round($per_person_garbage_chrg ) .'</td>
+                    <td>'. round($per_person_electricity_bill ) .'</td>
+                    <td>'. round($per_person_gas_bill ) .'</td>
+                    <td>'. round($per_person_khala_salary ) .'</td>
+                    <td align="center"><span class="badge bg-info">'. round($expense ) .'</span></td>
                     </tr>';
+                    
                 }
+             
                 $DB->insert('credential',$credential_params);
 
                $output.='<tr><td colspan="8" align="right"><span class="badge bg-success">'. $total .'</span></td></tr>
