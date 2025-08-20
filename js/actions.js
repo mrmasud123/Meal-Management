@@ -408,5 +408,43 @@ $(document).ready(function(){
         $("#mill_expense_modal").fadeOut(500);
     });
 
+
+    $("#flatCredentialsForm").on('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        formData.append('insert_flat_credentials', 1);
+
+        $.ajax({
+            url: 'actions.php',
+            method: 'POST',
+            data: formData,
+            contentType: false,     
+            processData: false, 
+            dataType:"json",   
+            success: function(res) {
+                if(res.success==1){
+                    $("#flatCredentialsForm").prepend(`<h5 id='error_msg'><span class='badge bg-success'>Seat rent updated.</span></h5>`);
+                    setTimeout(function(){
+                        $('#error_msg').remove();
+                    },2000);
+                                        
+                }else{
+                    $("#flatCredentialsForm").prepend(`<h5 id='error_msg'><span class='badge bg-danger'>${res.error}</span></h5>`);
+                    setTimeout(function(){
+                        $('#error_msg').remove();
+                    },2000);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("❌ AJAX error:", error);
+                console.log("Response:", xhr.responseText);
+            }
+        });
+
+    
+});
+
+
     
 });

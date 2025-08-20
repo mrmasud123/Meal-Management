@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12 d-flex flex-column align-items-center">
                 <div class="mill-header header__style text-center d-flex align-items-center flex-column">
-                    <h1>Bachelor Flat - 11</h1>
+                    <h1>Bachelor Flat</h1>
                     <div class="mt-5 mill-btns w-50 d-flex align-items-center justify-content-around">
                         <a href="index.php" class="btn btn-sm btn-success">Home</a>
                         <a href="update-mill.php" class="btn-sm btn bg-primary nav-link text-light ms-2">Update Credentials</a>

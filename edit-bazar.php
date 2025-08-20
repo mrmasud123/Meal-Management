@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-12">
             <div class="mill-header bg-info py-3 text-center d-flex align-items-center flex-column">
-                    <h1>Bachelor Flat - 11</h1>
+                    <h1>Bachelor Flat</h1>
                     <div class="mt-5 mill-btns w-50 d-flex align-items-center justify-content-around">
                         <a href="update-mill.php" class="btn bg-primary nav-link text-light ms-2">Update Mill</a>
                         <a href="index.php" class="btn bg-primary nav-link text-light ms-2">Home?</a>

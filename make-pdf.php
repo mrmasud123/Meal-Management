@@ -12,7 +12,7 @@ echo "";
 $timestamp = time();
 $total=0;
 $html = "<style>td{text-align:center;}</style>
-<h3 style='width:100%;text-align:center'>Flat-11 Monthly Expenses</h3>
+<h5 style='width:100%;text-align:center; background-color:green; color:white; padding:10px;'>Bachelor Flat Monthly Expenses</h5>
 <b>Flat Rent</b> : <span>".$credential[0]['flat_rent']."</span><br>
 <b>Service Charge</b> : <span>".$credential[0]['service_charge']."</span><br>
 <b>Electricity Bill</b> : <span>".$credential[0]['electricity_bill']."</span><br>
@@ -27,7 +27,7 @@ $html = "<style>td{text-align:center;}</style>
             <th>Seat Rent</th>
             <th>Service Charge</th>
             <th>Garbage Charge</th>
-            <th>Electricity Bill</th>
+            <th>Electricity+Wifi Bill</th>
             <th>Gas Bill</th>
             <th>Khala Salary</th>
             <th>Total</th>
@@ -37,22 +37,22 @@ $html = "<style>td{text-align:center;}</style>
 
 foreach ($data as $expense) {
     $total+=$expense['flat_rent']+$expense['service_charge']+$expense['garbage_charge'] +$expense['electricity_bill']+$expense['gas_bill']+$expense['khala_salary'];
-    $html .= "<tr>
+    $html .= "<tr >
                 <td>" . $expense['member'] . "</td>
                 <td>" . $expense['flat_rent'] . "</td>
                 <td>" . $expense['service_charge'] . "</td>
                 <td>" . $expense['garbage_charge'] . "</td>
                 <td>" . $expense['electricity_bill'] . "</td>
                 <td>" . $expense['gas_bill'] . "</td>
-                <td>" . $expense['khala_salary'] . "</td>
-                <td>" . $expense['total_amt'] . "</td>
+                <td >" . $expense['khala_salary'] . "</td>
+                <td >" . $expense['total_amt'] . "</td>
             </tr>";
 }
 
 
-$html .= "<tr><td colspan='8' align='right'><span style='font-size:19px;background-color:green;color:white'>Receive Amount : ". $total ."</span></td></tr></tbody></table><br/><br/><code style='font-size:10px'><strong>Created at :</strong> " . date('H:i:s, l d F, Y', $timestamp) . "</code>";
+$html .= "<tr><td colspan='8' align='right'><span style='font-size:15px;background-color:green;color:white'>Receive Amount : ". $total ."</span></td></tr></tbody></table><br/><code style='font-size:10px'><strong>Generated at :</strong> " . date('H:i:s, l d F, Y', $timestamp) . "</code><br/><br/><span style='color:red;font-size:5px'>Courtesy By: MR</span>";
 
-$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A6']); 
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A6', ]); 
 $mpdf->WriteHTML($html);
 $fileName = date('F') . '-expenses.pdf';
 $mpdf->Output($fileName, 'I');

@@ -14,18 +14,6 @@
     foreach($all_members as $member){
         array_push($total_members,$member['member_name']);
     }
-    // $a=0;
-    // foreach($mill_members_arr as $mill_arr){
-    //     if($all_members[$a] == $mill_arr['member_name']){
-    //         array_push($available_mill_members,$mill_arr['mill_count']);
-    //         $a++;
-    //     }
-    //     $a++;
-    // }
-    // echo "<pre>";
-    // print_r($available_mill_members);
-    // echo "</pre>";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +29,7 @@
         <div class="row">
             <div class="col-12">
             <div class="mill-header bg-info py-3 text-center d-flex align-items-center flex-column">
-                    <h1>Bachelor Flat - 11</h1>
+                    <h1>Bachelor Flat</h1>
                     <div class="mt-5 mill-btns w-50 d-flex align-items-center justify-content-around">
                         <a href="update-mill.php" class="btn bg-primary nav-link text-light ms-2">Update Mill</a>
                         <a href="index.php" class="btn bg-primary nav-link text-light ms-2">Home?</a>

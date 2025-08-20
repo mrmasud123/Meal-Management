@@ -25,7 +25,7 @@ $mill_year=$_GET['year'];
                 <div class="mill-header header__style py-3 text-center d-flex align-items-center flex-column">
                     <h1>Mill Record of <?php echo $mill_month ?></h1>
                     <div>
-                        <a href="send_mail.php?month=<?php echo $mill_month ?>" class="btn btn-warning m-1">Send mail</a>
+                        <!-- <a href="send_mail.php?month=<?php echo $mill_month ?>" class="btn btn-warning m-1">Send mail</a> -->
                         <a href="index.php" class="btn btn-warning m-1">Home</a>
                     </div>
                 </div>

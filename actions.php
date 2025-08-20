@@ -276,7 +276,6 @@
                     echo json_encode(array('success'=>1));
                     exit;
                 }
-                
             }
         }
     }
@@ -460,6 +459,29 @@
         }
         
     }
+
+    if (isset($_POST['insert_flat_credentials'])) {
+        $seat_types = $_POST['seat_type'] ?? [];
+        $seat_rents = $_POST['seat_rent'] ?? [];
+        $member_ids = $_POST['member_id'] ?? [];
+
+        foreach ($seat_rents as $key => $seat_rent) {
+
+            if (!is_numeric($seat_rent) || $seat_rent < 0 ) {
+               echo json_encode(array('error'=>"Invalid Seat Rent"));
+            exit;
+            }
+            $seat_rent = floatval($seat_rent);
+
+            $DB->sql("UPDATE members 
+                    SET seat_rent = '$seat_rent' 
+                    WHERE member_id = '$key'");
+        }
+
+        echo json_encode(array('success'=>1));
+                    exit;
+    }
+
 
    
    

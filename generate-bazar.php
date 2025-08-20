@@ -161,7 +161,6 @@ $html .= "<td style='text-align:center'>
 </tbody>
 </table><br/><code style='font-size:10px'><strong>Created at :</strong> " . date('H:i:s, l d F, Y', $timestamp) . "</code>";
 
-// Create the PDF
 $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A6']); 
 $mpdf->WriteHTML($html);
 $fileName =  $month.'-bazar.pdf';
