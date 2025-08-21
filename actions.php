@@ -322,22 +322,7 @@
             $total=0;
             $DB->select("members","*");
             $all_members=$DB->getResult();
-            
-            // $rents=array();
-            // foreach($all_members as $member){
-            //     if($member['seat_type']=='room_a'){
-            //         $rents[$member['member_name']]= $member['seat_rent'] / $_POST['flat_rent'];
-            //     }else if($member['seat_type'] == 'room_b'){
-            //         $rents[$member['member_name']]= $member['seat_rent'] / $_POST['flat_rent'];
-            //     }else if($member['seat_type'] == 'room_c'){
-            //         $rents[$member['member_name']]= $member['seat_rent'] / $_POST['flat_rent'];
-            //     }
-            // }
-            // print_r($rents);
-            // die();
             $total_members=count($all_members);
-            // $dining_space_rent=$_POST['flat_rent']*0.13;
-            // $other_per_person_rent=($_POST['flat_rent']-$dining_space_rent)/($total_members-1);
             $per_person_service_chrg=round($_POST['service_charge']/$total_members);
             $per_person_garbage_chrg=round($_POST['garbage_charge']/$total_members);
             $per_person_electricity_bill=round($_POST['electricity_bill']/$total_members);
@@ -358,13 +343,6 @@
                 </thead>
                 <tbody>';
                 foreach($all_members as $members){
-                    // if($members['seat_type']=="dining"){
-                    //     $seat_rate=$dining_space_rent;
-                    //     $flag="bg-warning";
-                    // }else{
-                    //     $seat_rate=$other_per_person_rent;
-                    //     $flag="bg-light";
-                    // }
                     $expense=$members['seat_rent']+$per_person_electricity_bill+$per_person_garbage_chrg+$per_person_service_chrg+$per_person_gas_bill+$per_person_khala_salary;
                     $total+=$expense;
                     $params=[
@@ -389,7 +367,6 @@
                     <td>'. round($per_person_khala_salary ) .'</td>
                     <td align="center"><span class="badge bg-info">'. round($expense ) .'</span></td>
                     </tr>';
-                    
                 }
              
                 $DB->insert('credential',$credential_params);
@@ -484,6 +461,6 @@
 
 
    
-   
+   /* Masud Rana */
     
 ?>
