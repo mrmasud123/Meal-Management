@@ -283,6 +283,22 @@
     //Flat Credentials
     if(isset($_POST['calculate_flat_credentials'])){
         
+        $DB->select("members","*");
+        $all_members=$DB->getResult();
+        $khala_salary_excluded_member = [];
+
+        foreach ($all_members as $member) {
+            $post_key = 'member' . ($member["member_id"] + 999);
+            if (isset($_POST[$post_key])) {
+                $khala_salary_excluded_member[$member['member_id']] = $member["member_name"];
+            }
+        }
+        $khala_salary = isset($_POST['khala_salary']) ? (float)$_POST['khala_salary'] : 0;
+        $original_khala_salary = $khala_salary;
+
+        $total_included = count($all_members) - count($khala_salary_excluded_member);
+
+        $person_excluded_khala_salary = $total_included > 0 ? $khala_salary / $total_included : 0;
         if($_POST['flat_rent']<0){
             echo json_encode(array('error'=>"Invalid Flat Rent"));
             exit;
@@ -323,11 +339,10 @@
             $DB->select("members","*");
             $all_members=$DB->getResult();
             $total_members=count($all_members);
-            $per_person_service_chrg=round($_POST['service_charge']/$total_members);
-            $per_person_garbage_chrg=round($_POST['garbage_charge']/$total_members);
-            $per_person_electricity_bill=round($_POST['electricity_bill']/$total_members);
-            $per_person_gas_bill=round($_POST['gas_bill']/$total_members);
-            $per_person_khala_salary=round($_POST['khala_salary']/$total_members);
+            $per_person_service_chrg=ceil($_POST['service_charge']/$total_members);
+            $per_person_garbage_chrg=ceil($_POST['garbage_charge']/$total_members);
+            $per_person_electricity_bill=ceil($_POST['electricity_bill']/$total_members);
+            $per_person_gas_bill=ceil($_POST['gas_bill']/$total_members);
             $output.='<table class="table table-bordered table-hover table-stripped">
                 <thead>
                     <tr>
@@ -343,6 +358,14 @@
                 </thead>
                 <tbody>';
                 foreach($all_members as $members){
+                    $member_id = $members['member_id'];
+                    $member_name = htmlspecialchars($members['member_name']);
+
+                    if (array_key_exists($member_id, $khala_salary_excluded_member)) {
+                        $per_person_khala_salary = 0;
+                    } else {
+                        $per_person_khala_salary = $person_excluded_khala_salary;
+                    }
                     $expense=$members['seat_rent']+$per_person_electricity_bill+$per_person_garbage_chrg+$per_person_service_chrg+$per_person_gas_bill+$per_person_khala_salary;
                     $total+=$expense;
                     $params=[
@@ -352,23 +375,23 @@
                         'garbage_charge'=>$per_person_garbage_chrg,
                         'electricity_bill'=>$per_person_electricity_bill,
                         'gas_bill'=>$per_person_gas_bill,
-                        'khala_salary'=>$per_person_khala_salary,
-                        'total_amt'=>round($expense)
+                        'khala_salary'=>ceil($per_person_khala_salary),
+                        'total_amt'=>ceil($expense)
                     ];
                     $DB->insert('monthly_expenses',$params);
                     
                     $output.='<tr class="'.$flag.'">
                     <td class="text-capitalize">'.$members['member_name'].'</td>
-                    <td>'. round($members['seat_rent'] ) .'</td>
-                    <td>'. round($per_person_service_chrg ) .'</td>
-                    <td>'. round($per_person_garbage_chrg ) .'</td>
-                    <td>'. round($per_person_electricity_bill ) .'</td>
-                    <td>'. round($per_person_gas_bill ) .'</td>
-                    <td>'. round($per_person_khala_salary ) .'</td>
-                    <td align="center"><span class="badge bg-info">'. round($expense ) .'</span></td>
+                    <td>'. ceil($members['seat_rent'] ) .'</td>
+                    <td>'. ceil($per_person_service_chrg ) .'</td>
+                    <td>'. ceil($per_person_garbage_chrg ) .'</td>
+                    <td>'. ceil($per_person_electricity_bill ) .'</td>
+                    <td>'. ceil($per_person_gas_bill ) .'</td>
+                    <td>'. ceil($per_person_khala_salary ) .'</td>
+                    <td align="center"><span class="badge bg-info">'. ceil($expense ) .'</span></td>
                     </tr>';
                 }
-             
+                
                 $DB->insert('credential',$credential_params);
 
                $output.='<tr><td colspan="8" align="right"><span class="badge bg-success">'. $total .'</span></td></tr>

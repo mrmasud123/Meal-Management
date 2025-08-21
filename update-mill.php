@@ -162,6 +162,14 @@
                                                 <input id="gas_bill" name="gas_bill" class="form-control" type="number">
                                             </div>
                                             <div class="form-group mt-2 mb-2">
+                                                <ul>
+                                                    <?php foreach($all_members as $member){ ?>
+                                                            <li class="btn btn-primary list-item m-2">
+                                                                <input data-miller-id="<?php echo $member['member_id'] ?>" class="mill_member_check" id="member<?php echo $member['member_id']+999; ?>" name="member<?php echo $member['member_id']+999; ?>" type="checkbox">
+                                                                <label class="text-capitalize" for="member<?php echo $member['member_id']+999; ?>"><?php echo $member['member_name']; ?></label>
+                                                            </li>
+                                                        <?php } ?>
+                                                    </ul>
                                                 <label for="gas_bill" class=" ">খালা বেতন</label>
                                                 <input id="gas_bill" name="khala_salary" class="form-control" type="number">
                                             </div>
